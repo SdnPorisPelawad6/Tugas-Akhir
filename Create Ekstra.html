@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Data Guru</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" crossorigin="anonymous"></script>
+    <style>
+        * {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+         /* Latar belakang dengan gambar */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: url('img/bg-skl.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    position: relative;
+}
+
+/* Overlay blur dengan ::before */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(1px); /* Efek blur */
+    background: rgba(255, 255, 255, 0.1); /* Transparansi agar blur aktif */
+    z-index: -1;
+}
+
+
+        /* Navbar */
+.navbar {
+    width: 100%;
+    height: 60px;
+    background: #5D2D2A;
+    color: white;
+    display: flex;
+    align-items: center; /* Pastikan semua elemen di dalam navbar sejajar vertikal */
+    padding: 0 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+/* Logo */
+.navbar img {
+    height: 40px;
+    width: 40px;
+    margin-right: 10px; /* Kurangi margin agar lebih rapat */
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Teks Admin Sekolah */
+.navbar h1 {
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center; /* Sejajarkan teks dengan logo */
+    margin: 0; /* Pastikan tidak ada margin tambahan */
+}
+.menu-icon {
+            font-size: 24px;
+            cursor: pointer;
+            margin-left: auto;
+        }
+        /* Sidebar */
+.sidebar {
+    width: 250px;
+    background: #6A3332;
+    color: white;
+    height: 100vh;
+    padding-top: 80px;
+    position: fixed;
+    left: -250px;
+    top: 0;
+    transition: left 0.4s ease-in-out;
+    z-index: 999;
+}
+
+/* List dalam sidebar */
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 5px 0;
+}
+
+/* Item dalam sidebar */
+.sidebar ul li a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    padding: 12px 15px;
+    transition: background 0.3s;
+    font-weight: bold;
+    gap: 10px; /* Menambah jarak antara ikon dan teks */
+}
+
+/* Icon dalam sidebar */
+.sidebar ul li a i {
+    font-size: 20px;
+    width: 30px; /* Memberikan ruang agar ikon sejajar */
+    text-align: center;
+}
+
+/* Hover efek */
+.sidebar ul li a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+}
+
+/* Submenu */
+.submenu {
+    display: none;
+    list-style: none;
+    padding-left: 45px; /* Menyesuaikan indentasi submenu */
+}
+
+.submenu li a {
+    font-size: 16px;
+    padding: 8px 20px;
+    display: block;
+}
+
+.submenu li a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+}
+
+/* Untuk menu yang memiliki submenu */
+.has-submenu a {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Ikon submenu (panah) */
+.submenu-toggle {
+    transition: transform 0.3s ease-in-out;
+    font-size: 16px;
+}
+
+/* Animasi panah saat submenu terbuka */
+.submenu-open .submenu-toggle {
+    transform: rotate(90deg);
+}
+/* Overlay untuk sidebar */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+}
+.container {
+            background-color: #ddd;
+            padding: 20px;
+            border-radius: 10px;
+            width: 400px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 0 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: block;
+        }
+        textarea {
+            height: 100px;
+            resize: none;
+        }
+        .btn {
+            background-color: #643f3f;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            width: calc(100% - 20px);
+            margin: 0 auto;
+        }
+        .btn:hover {
+            background-color: #512e2e;
+        }
+
+
+        @media (max-width: 600px) {
+            .form-group {
+                flex-direction: column;
+            }
+
+            .left, .right {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Overlay latar belakang blur -->
+<div class="background-overlay"></div>
+    <!-- Navbar -->
+    <div class="navbar">
+        <img src="img/Logo.png" alt="Logo Sekolah">
+        <h1>Admin Sekolah</h1>
+        <span class="menu-icon" onclick="openSidebar()">☰</span>
+    </div>
+
+        <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <ul>
+            <li><a href="Dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="Data Guru.html"><i class="fas fa-chalkboard-teacher"></i> Data Guru</a></li>
+            
+            <li class="has-submenu">
+                <a href="#" onclick="toggleSubmenu(event)">
+                    <span><i class="fas fa-trophy"></i> Data Prestasi</span>
+                    <i class="fas fa-chevron-left submenu-toggle"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="Prestasi Guru.html">Prestasi Guru</a></li>
+                    <li><a href="Prestasi Siswa.html">Prestasi Siswa</a></li>
+                    <li><a href="Prestasi Sekolah.html">Prestasi Sekolah</a></li>
+                </ul>
+            </li>
+
+            <li><a href="Ekstrakurikuler.html"><i class="fas fa-futbol"></i> Ekstrakurikuler</a></li>
+            <li><a href="Berita.html"><i class="fas fa-newspaper"></i> Berita</a></li>
+
+            <!-- Menu Pengguna dengan submenu -->
+            <li class="has-submenu">
+                <a href="#" onclick="toggleSubmenu(event)">
+                    <span><i class="fas fa-user"></i> Pengguna</span>
+                    <i class="fas fa-chevron-left submenu-toggle"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="#">Walikelas</a></li>
+                    <li><a href="#">Perpustakaan</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+    <div class="container">
+        <h2 style="text-align: center;">Create Ekstrakurikuler</h2>
+        <div class="form-group">
+            <label for="judul">Judul</label>
+            <input type="text" id="judul" placeholder="Jenis Prestasi">
+        </div>
+        <div class="form-group">
+            <label for="keterangan">Keterangan</label>
+            <textarea id="keterangan" placeholder="Keterangan"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="foto">Foto</label>
+            <input type="file" id="foto">
+        </div>
+        <button class="btn">SIMPAN</button>
+    </div>
+    <script>
+        function openSidebar() {
+            document.getElementById("sidebar").style.left = "0";
+            document.getElementById("overlay").style.display = "block";
+        }
+
+        function closeSidebar() {
+            document.getElementById("sidebar").style.left = "-250px";
+            document.getElementById("overlay").style.display = "none";
+        }
+
+        document.addEventListener("click", function(event) {
+            let sidebar = document.getElementById("sidebar");
+            let menuIcon = document.querySelector(".menu-icon");
+            if (!sidebar.contains(event.target) && !menuIcon.contains(event.target)) {
+                closeSidebar();
+            }
+        });
+
+        function toggleSubmenu(event) {
+            event.preventDefault();
+            let submenuContainer = event.target.closest(".has-submenu");
+            let submenu = submenuContainer.querySelector(".submenu");
+            let icon = submenuContainer.querySelector(".submenu-toggle");
+
+            let isOpen = submenu.style.display === "block";
+
+            // Tutup semua submenu lain
+            document.querySelectorAll(".submenu").forEach(s => s.style.display = "none");
+            document.querySelectorAll(".submenu-toggle").forEach(i => i.style.transform = "rotate(0deg)");
+            document.querySelectorAll(".has-submenu").forEach(hs => hs.classList.remove("submenu-open"));
+
+            // Jika belum terbuka, buka submenu yang diklik
+            if (!isOpen) {
+                submenu.style.display = "block";
+                icon.style.transform = "rotate(90deg)";
+                submenuContainer.classList.add("submenu-open");
+            }
+        }
+        
+    </script>
+</body>
+</html>
