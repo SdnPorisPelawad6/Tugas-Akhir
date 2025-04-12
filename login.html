@@ -64,6 +64,11 @@ list-style: none;
 display: flex;
 gap: 1rem;
 }
+/* Tambahkan ini untuk submenu paling kanan agar tidak keluar layar */
+.nav-links li:last-child .dropdown-content {
+    right: 0;
+    left: auto;
+}
 
 .nav-links a {
 color: white;
@@ -291,12 +296,12 @@ background-color: white;
     <p class="error-message" th:if="${error}" th:text="${error}"></p>
 </div>
 
-<script>
-    // Hamburger menu toggle
-    function toggleMenu() {
-        const navLinks = document.getElementById("nav-links");
-        navLinks.classList.toggle("active");
-    }
-</script>
+    <script>
+        // Hamburger menu toggle
+        function toggleMenu() {
+            const navLinks = document.getElementById("nav-links");
+            navLinks.classList.toggle("active");
+        }
+    </script>
 </body>
 </html>
