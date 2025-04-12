@@ -15,162 +15,148 @@
         }
 
         body {
-            padding: 20px;
-            text-align: center;
+            padding: 0;
+            margin: 0;
             background-color: #f8f9fa;
         }
-        
-        /* Navbar */
-.navbar {
-    width: 100%;
-    height: 60px;
-    background: #5D2D2A;
-    color: white;
-    display: flex;
-    align-items: center; /* Pastikan semua elemen di dalam navbar sejajar vertikal */
-    padding: 0 20px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-}
 
-/* Logo */
-.navbar img {
-    height: 40px;
-    width: 40px;
-    margin-right: 10px; /* Kurangi margin agar lebih rapat */
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-/* Teks Admin Sekolah */
-.navbar h1 {
-    font-size: 20px;
-    font-weight: bold;
-    display: flex;
-    align-items: center; /* Sejajarkan teks dengan logo */
-    margin: 0; /* Pastikan tidak ada margin tambahan */
-}
-
+        .navbar {
+            width: 100%;
+            height: 60px;
+            background: #5D2D2A;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
 
         .menu-icon {
             font-size: 24px;
             cursor: pointer;
-            margin-left: auto;
         }
 
-       /* Sidebar */
-.sidebar {
-    width: 250px;
-    background: #6A3332;
-    color: white;
-    height: 100vh;
-    padding-top: 80px;
-    position: fixed;
-    left: -250px;
-    top: 0;
-    transition: left 0.4s ease-in-out;
-    z-index: 999;
-}
+        .right-section {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: auto;
+    }
+        .navbar i.user-icon {
+      font-size: 30px !important; /* Menambah ukuran ikon dengan prioritas lebih tinggi */
+    }
+    .navbar h1 {
+      font-size: 20px;
+      font-weight: bold;
+    }
 
-/* List dalam sidebar */
-.sidebar ul {
-    list-style: none;
-    padding: 0;
-}
-
-.sidebar ul li {
-    margin: 5px 0;
-}
-
-/* Item dalam sidebar */
-.sidebar ul li a {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: white;
-    font-size: 18px;
-    padding: 12px 15px;
-    transition: background 0.3s;
-    font-weight: bold;
-    gap: 10px; /* Menambah jarak antara ikon dan teks */
-}
-
-/* Icon dalam sidebar */
-.sidebar ul li a i {
-    font-size: 20px;
-    width: 30px; /* Memberikan ruang agar ikon sejajar */
-    text-align: center;
-}
-
-/* Hover efek */
-.sidebar ul li a:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
-}
-
-/* Submenu */
-.submenu {
-    display: none;
-    list-style: none;
-    padding-left: 45px; /* Menyesuaikan indentasi submenu */
-}
-
-.submenu li a {
-    font-size: 16px;
-    padding: 8px 20px;
-    display: block;
-}
-
-.submenu li a:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
-}
-
-/* Untuk menu yang memiliki submenu */
-.has-submenu a {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-/* Ikon submenu (panah) */
-.submenu-toggle {
-    transition: transform 0.3s ease-in-out;
-    font-size: 16px;
-}
-
-/* Animasi panah saat submenu terbuka */
-.submenu-open .submenu-toggle {
-    transform: rotate(90deg);
-}
-
-/* Overlay untuk sidebar */
-.overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 998;
-}
-
-.content {
-            margin-top: 80px; /* Menambah jarak dari atas untuk navbar */
+        .sidebar {
+            width: 250px;
+            background: #6A3332;
+            color: white;
+            height: 100vh;
+            padding-top: 80px;
+            position: fixed;
+            left: -250px;
+            top: 0;
+            transition: left 0.4s ease-in-out;
+            z-index: 999;
         }
 
-        h1 {
-            margin-bottom: 10px;
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin: 5px 0;
+        }
+
+        .sidebar ul li a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            padding: 12px 15px;
+            transition: background 0.3s;
+            font-weight: bold;
+            gap: 10px;
+        }
+
+        .sidebar ul li a i {
+            font-size: 20px;
+            width: 30px;
+            text-align: center;
+        }
+
+        .sidebar ul li a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+        }
+
+        .submenu {
+            display: none;
+            list-style: none;
+            padding-left: 45px;
+        }
+
+        .submenu li a {
+            font-size: 16px;
+            padding: 8px 20px;
+            display: block;
+        }
+
+        .submenu li a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+        }
+
+        .has-submenu a {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .submenu-toggle {
+            transition: transform 0.3s ease-in-out;
+            font-size: 16px;
+        }
+
+        .submenu-open .submenu-toggle {
+            transform: rotate(90deg);
+        }
+
+        .content {
+            margin-top: 80px;
+            margin-left: 0;
+            transition: margin-left 0.4s ease-in-out;
+            padding: 20px;
+        }
+
+        .content h1 {
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 40px;
+        }
+
+        .content.shifted {
+            margin-left: 250px;
         }
 
         .search-container {
             text-align: right;
             margin-bottom: 10px;
-            margin-right: 20px;
         }
 
         .search-container input {
@@ -231,120 +217,101 @@
             color: red;
         }
 
-/* Saat sidebar ditutup, reset padding */
-.sidebar-closed .content {
-    padding-left: 20px; /* Kembali ke posisi awal saat sidebar tertutup */
-}
+        @media screen and (max-width: 768px) {
+            .navbar {
+                padding: 0 10px;
+            }
 
-@media screen and (max-width: 768px) {
-    /* Navbar */
-    .navbar {
-        padding: 0 10px;
-    }
+            .navbar-right h1 {
+                font-size: 16px;
+            }
 
-    .navbar h1 {
-        font-size: 16px; /* Ukuran lebih kecil di mobile */
-    }
+            .sidebar {
+                width: 220px;
+                left: -220px;
+            }
 
-    /* Sidebar */
-    .sidebar {
-        width: 220px; /* Lebih kecil agar pas di mobile */
-        left: -220px;
-    }
+            .content.shifted {
+                margin-left: 220px;
+            }
 
-    /* Konten utama */
-    .content {
-        margin-left: 0; /* Tidak tertutup sidebar */
-        padding: 10px;
-        margin-top: 70px; /* Tambah jarak agar tidak tertutup navbar */
-    }
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+        }
 
-    /* Tabel responsif */
-    table {
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
-    }
-}
+        @media screen and (max-width: 480px) {
+            .navbar-right h1 {
+                font-size: 14px;
+            }
 
-/* Untuk layar yang lebih kecil (mobile) */
-@media screen and (max-width: 480px) {
-    .navbar h1 {
-        font-size: 14px; /* Lebih kecil di layar kecil */
-    }
+            .menu-icon {
+                font-size: 20px;
+            }
 
-    .menu-icon {
-        font-size: 20px;
-    }
+            .sidebar {
+                width: 200px;
+                left: -200px;
+            }
 
-    /* Sidebar */
-    .sidebar {
-        width: 200px;
-        left: -200px;
-    }
+            .content.shifted {
+                margin-left: 200px;
+            }
 
-    /* Ukuran font agar nyaman dibaca */
-    .sidebar ul li a {
-        font-size: 16px;
-        padding: 10px;
-    }
+            .sidebar ul li a {
+                font-size: 16px;
+                padding: 10px;
+            }
 
-    /* Tabel lebih responsif */
-    th, td {
-        font-size: 14px;
-        padding: 5px;
-    }
-}
-
+            th, td {
+                font-size: 14px;
+                padding: 5px;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Navbar -->
     <div class="navbar">
-        <img src="img/Logo.png" alt="Logo Sekolah">
-        <h1>Admin Sekolah</h1>
-        <span class="menu-icon" onclick="openSidebar()">☰</span>
+        <span class="menu-icon" onclick="toggleSidebar()">☰</span>
+        <div class="right-section">
+          <h1>Admin Sekolah</h1>
+          <i class="fas fa-user-circle user-icon"></i>
+        </div>
+      </div>
+
+    <div class="sidebar" id="sidebar">
+        <ul>
+            <li><a href="Dashboard Admin.html"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="#l"><i class="fas fa-chalkboard-teacher"></i> Data Guru</a></li>
+            <li class="has-submenu">
+                <a href="#" onclick="toggleSubmenu(event)">
+                    <span><i class="fas fa-trophy"></i> Data Prestasi</span>
+                    <i class="fas fa-chevron-left submenu-toggle"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="Data Prestasi Guru.html">Prestasi Guru</a></li>
+                    <li><a href="Data Prestasi Siswa.html">Prestasi Siswa</a></li>
+                    <li><a href="Data Prestasi Sekolah.html">Prestasi Sekolah</a></li>
+                </ul>
+            </li>
+            <li><a href="Data Ekstrakurikuler.html"><i class="fas fa-futbol"></i> Ekstrakurikuler</a></li>
+            <li><a href="Data Berita.html"><i class="fas fa-newspaper"></i> Berita</a></li>
+            <li class="has-submenu">
+                <a href="#" onclick="toggleSubmenu(event)">
+                    <span><i class="fas fa-user"></i> Pengguna</span>
+                    <i class="fas fa-chevron-left submenu-toggle"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="Data Wali Kelas.html">Wali kelas</a></li>
+                    <li><a href="Data Perpustakaan.html">Perpustakaan</a></li>
+                </ul>
+            </li>
+        </ul>
     </div>
 
-     <!-- Sidebar -->
-<div class="sidebar" id="sidebar">
-    <ul>
-        <li><a href="Dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
-        <li><a href="Data Guru.html"><i class="fas fa-chalkboard-teacher"></i> Data Guru</a></li>
-        
-        <li class="has-submenu">
-            <a href="#" onclick="toggleSubmenu(event)">
-                <span><i class="fas fa-trophy"></i> Data Prestasi</span>
-                <i class="fas fa-chevron-left submenu-toggle"></i>
-            </a>
-            <ul class="submenu">
-                <li><a href="Prestasi Guru.html">Prestasi Guru</a></li>
-                <li><a href="Prestasi Siswa.html">Prestasi Siswa</a></li>
-                <li><a href="Prestasi Sekolah.html">Prestasi Sekolah</a></li>
-            </ul>
-        </li>
-
-        <li><a href="#"><i class="fas fa-futbol"></i> Ekstrakurikuler</a></li>
-        <li><a href="#"><i class="fas fa-newspaper"></i> Berita</a></li>
-
-        <!-- Menu Pengguna dengan submenu -->
-        <li class="has-submenu">
-            <a href="#" onclick="toggleSubmenu(event)">
-                <span><i class="fas fa-user"></i> Pengguna</span>
-                <i class="fas fa-chevron-left submenu-toggle"></i>
-            </a>
-            <ul class="submenu">
-                <li><a href="#">Walikelas</a></li>
-                <li><a href="#">Perpustakaan</a></li>
-            </ul>
-        </li>
-    </ul>
-</div>
-
-    <!-- Overlay -->
-    <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
-
-    <div class="content">
+    <div class="content" id="content">
         <h1>Data Guru</h1>
 
         <div class="search-container">
@@ -379,79 +346,7 @@
                     <td>III/B</td>
                     <td>Guru Matematika</td>
                     <td>-</td>
-                    <td>-</td>
-                    <td>
-                        <button class="edit-btn" onclick="editRow(this)">✏️</button>
-                        <button class="delete-btn" onclick="deleteRow(this)">🗑️</button>
-                    </td>
-                </tr>
-            </tbody>
-            <tbody>
-                <tr>
-                    <td>2</td>
-                    <td>Ahmad Fauzan</td>
-                    <td>123456</td>
-                    <td>Jakarta, 10 Jan 1985</td>
-                    <td>Laki-laki</td>
-                    <td>Islam</td>
-                    <td>III/B</td>
-                    <td>Guru Matematika</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>
-                        <button class="edit-btn" onclick="editRow(this)">✏️</button>
-                        <button class="delete-btn" onclick="deleteRow(this)">🗑️</button>
-                    </td>
-                </tr>
-            </tbody>
-            <tbody>
-                <tr>
-                    <td>3</td>
-                    <td>Ahmad Fauzan</td>
-                    <td>123456</td>
-                    <td>Jakarta, 10 Jan 1985</td>
-                    <td>Laki-laki</td>
-                    <td>Islam</td>
-                    <td>III/B</td>
-                    <td>Guru Matematika</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>
-                        <button class="edit-btn" onclick="editRow(this)">✏️</button>
-                        <button class="delete-btn" onclick="deleteRow(this)">🗑️</button>
-                    </td>
-                </tr>
-            </tbody>
-            <tbody>
-                <tr>
-                    <td>4</td>
-                    <td>Ahmad Fauzan</td>
-                    <td>123456</td>
-                    <td>Jakarta, 10 Jan 1985</td>
-                    <td>Laki-laki</td>
-                    <td>Islam</td>
-                    <td>III/B</td>
-                    <td>Guru Matematika</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>
-                        <button class="edit-btn" onclick="editRow(this)">✏️</button>
-                        <button class="delete-btn" onclick="deleteRow(this)">🗑️</button>
-                    </td>
-                </tr>
-            </tbody>
-            <tbody>
-                <tr>
-                    <td>5</td>
-                    <td>Ahmad Fauzan</td>
-                    <td>123456</td>
-                    <td>Jakarta, 10 Jan 1985</td>
-                    <td>Laki-laki</td>
-                    <td>Islam</td>
-                    <td>III/B</td>
-                    <td>Guru Matematika</td>
-                    <td>-</td>
-                    <td>-</td>
+                    <td><img src="img/foto_guru/ahmad_fauzan.jpg" alt="Foto Ahmad" style="width: 60px; height: 60px; object-fit: cover; border-radius: 5px;"></td>
                     <td>
                         <button class="edit-btn" onclick="editRow(this)">✏️</button>
                         <button class="delete-btn" onclick="deleteRow(this)">🗑️</button>
@@ -466,23 +361,12 @@
     </div>
 
     <script>
-        function openSidebar() {
-            document.getElementById("sidebar").style.left = "0";
-            document.getElementById("overlay").style.display = "block";
+        function toggleSidebar() {
+            const sidebar = document.getElementById("sidebar");
+            const content = document.getElementById("content");
+            sidebar.classList.toggle("active");
+            content.classList.toggle("shifted");
         }
-
-        function closeSidebar() {
-            document.getElementById("sidebar").style.left = "-250px";
-            document.getElementById("overlay").style.display = "none";
-        }
-
-        document.addEventListener("click", function(event) {
-            let sidebar = document.getElementById("sidebar");
-            let menuIcon = document.querySelector(".menu-icon");
-            if (!sidebar.contains(event.target) && !menuIcon.contains(event.target)) {
-                closeSidebar();
-            }
-        });
 
         function toggleSubmenu(event) {
             event.preventDefault();
@@ -492,73 +376,35 @@
 
             let isOpen = submenu.style.display === "block";
 
-            // Tutup semua submenu lain
             document.querySelectorAll(".submenu").forEach(s => s.style.display = "none");
             document.querySelectorAll(".submenu-toggle").forEach(i => i.style.transform = "rotate(0deg)");
             document.querySelectorAll(".has-submenu").forEach(hs => hs.classList.remove("submenu-open"));
 
-            // Jika belum terbuka, buka submenu yang diklik
             if (!isOpen) {
                 submenu.style.display = "block";
                 icon.style.transform = "rotate(90deg)";
                 submenuContainer.classList.add("submenu-open");
             }
         }
-        function searchTable() {
-            let input, filter, table, tr, td, i, txtValue;
-            input = document.getElementById("search");
-            filter = input.value.toLowerCase();
-            table = document.getElementById("guruTable");
-            tr = table.getElementsByTagName("tr");
 
-            for (i = 1; i < tr.length; i++) { 
-                td = tr[i].getElementsByTagName("td")[1]; 
+        function searchTable() {
+            let input = document.getElementById("search");
+            let filter = input.value.toLowerCase();
+            let table = document.getElementById("guruTable");
+            let tr = table.getElementsByTagName("tr");
+
+            for (let i = 1; i < tr.length; i++) {
+                let td = tr[i].getElementsByTagName("td")[1];
                 if (td) {
-                    txtValue = td.textContent || td.innerText;
-                    if (txtValue.toLowerCase().indexOf(filter) > -1) {
-                        tr[i].style.display = "";
-                    } else {
-                        tr[i].style.display = "none";
-                    }
+                    let txtValue = td.textContent || td.innerText;
+                    tr[i].style.display = txtValue.toLowerCase().includes(filter) ? "" : "none";
                 }
             }
         }
 
-        function editRow(btn) {
-            let row = btn.closest("tr");
-            let nama = row.cells[1].innerText;
-            alert("Edit data guru: " + nama);
-        }
-
-        function deleteRow(btn) {
-            let row = btn.closest("tr");
-            let nama = row.cells[1].innerText;
-            if (confirm("Apakah Anda yakin ingin menghapus data " + nama + "?")) {
-                row.remove();
-            }
-        }
         document.querySelector(".create-button").addEventListener("click", function() {
-        window.location.href = "Create Data Guru.html"; // Ganti dengan URL halaman create data guru
-    });
-
-    function editRow(button) {
-        let row = button.closest("tr");
-        let nama = row.cells[1].textContent;
-        alert("Edit data guru: " + nama);
-        // Tambahkan logika pengeditan di sini
-    }
-
-    function deleteRow(button) {
-        let row = button.closest("tr");
-        let nama = row.cells[1].textContent;
-        let confirmDelete = confirm("Apakah Anda yakin ingin menghapus data guru: " + nama + "?");
-        if (confirmDelete) {
-            row.remove();
-        }
-    }
-    
-</script>
-
+            window.location.href = "Create Data Guru.html";
+        });
     </script>
 </body>
 </html>
