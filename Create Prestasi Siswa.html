@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dashboard Admin</title>
+  <title>Create Prestasi Siswa - SDN Poris Pelawad 6</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" crossorigin="anonymous"></script>
   <style>
     * {
@@ -239,90 +239,89 @@
   </style>
 </head>
 <body>
-  <div class="navbar">
-    <span class="menu-icon" onclick="toggleSidebar()">☰</span>
-    <div class="right-section">
-      <h1>Admin Sekolah</h1>
-      <i class="fas fa-user-circle user-icon"></i>
-    </div>
+<div class="navbar">
+  <span class="menu-icon" onclick="toggleSidebar()">☰</span>
+  <div class="right-section">
+    <h1>Admin Sekolah</h1>
+    <i class="fas fa-user-circle user-icon"></i>
   </div>
+</div>
 
-  <div class="sidebar" id="sidebar">
-    <ul class="menu-list">
-      <li><a href="Dashboard Admin.html"><i class="fas fa-home"></i> Dashboard</a></li>
-      <li><a href="Data Guru.html"><i class="fas fa-chalkboard-teacher"></i> Data Guru</a></li>
-      <li class="has-submenu">
-        <a href="#" onclick="toggleSubmenu(event)">
-          <span><i class="fas fa-trophy"></i> Data Prestasi</span>
-          <i class="fas fa-chevron-left submenu-toggle"></i>
-        </a>
-        <ul class="submenu">
-          <li><a href="Data Prestasi Guru.html">Prestasi Guru</a></li>
-          <li><a href="Data Prestasi Siswa.html">Prestasi Siswa</a></li>
-          <li><a href="Data Prestasi Sekolah.html">Prestasi Sekolah</a></li>
-          <li><a href="Data Prestasi Kelas.html">Prestasi Kelas</a></li>
-        </ul>
-      </li>
-      <li><a href="Data Ekstrakurikuler.html"><i class="fas fa-futbol"></i> Ekstrakurikuler</a></li>
-      <li><a href="Data Berita.html"><i class="fas fa-newspaper"></i> Berita</a></li>
-      <li><a href="#" onclick="confirmLogout()"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-    </ul>
-  </div>
+<div class="sidebar" id="sidebar">
+  <ul class="menu-list">
+    <li><a href="Dashboard Admin.html"><i class="fas fa-home"></i> Dashboard</a></li>
+    <li><a href="Data Guru.html"><i class="fas fa-chalkboard-teacher"></i> Data Guru</a></li>
+    <li class="has-submenu">
+      <a href="#" onclick="toggleSubmenu(event)">
+        <span><i class="fas fa-trophy"></i> Data Prestasi</span>
+        <i class="fas fa-chevron-left submenu-toggle"></i>
+      </a>
+      <ul class="submenu">
+        <li><a href="Data Prestasi Guru.html">Prestasi Guru</a></li>
+        <li><a href="Data Prestasi Siswa.html">Prestasi Siswa</a></li>
+        <li><a href="Data Prestasi Sekolah.html">Prestasi Sekolah</a></li>
+        <li><a href="Data Prestasi Kelas.html">Prestasi Kelas</a></li>
+      </ul>
+    </li>
+    <li><a href="Data Ekstrakurikuler.html"><i class="fas fa-futbol"></i> Ekstrakurikuler</a></li>
+    <li><a href="Data Berita.html"><i class="fas fa-newspaper"></i> Berita</a></li>
+    <li><a href="#" onclick="confirmLogout()"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+  </ul>
+</div>
 
-  <div class="container">
-    <span class="close-btn" onclick="window.location.href='Data Prestasi Siswa.html'">&times;</span>
-    <h2>CREATE PRESTASI SISWA</h2>
-    <form>
-      <label for="jenis">Nama Guru</label>
-      <input type="text" id="jenis" placeholder="Nama Guru">
-      
-    
-      <label for="peringkat">Peringkat</label>
-      <input type="text" id="peringkat" placeholder="Peringkat">
-      
-      <label for="tingkat">Tingkat</label>
-      <input type="text" id="tingkat" placeholder="Tingkat">
-      
-      <label for="tingkat">Jenis Prestasi</label>
-      <input type="text" id="tingkat" placeholder="Jenis Prestasi">
-      
-      <label for="tingkat">Deskripsi</label>
-      <input type="text" id="tingkat" placeholder="Deskripsi">
-      
-      <button type="submit" class="btn">SIMPAN</button>
-    </form>
-  </div>
+<div class="container">
+  <span class="close-btn" onclick="window.location.href='Data Prestasi Siswa.html'">&times;</span>
+  <h2>CREATE PRESTASI SISWA</h2>
+  <form action="#" method="post">
+    <label for="namaGuru">Nama Guru</label>
+    <input type="text" id="namaGuru" name="namaGuru" placeholder="Nama Guru" required>
 
-  <script>
-    function toggleSubmenu(event) {
-      event.preventDefault();
-      let submenuContainer = event.target.closest(".has-submenu");
-      let submenu = submenuContainer.querySelector(".submenu");
-      let icon = submenuContainer.querySelector(".submenu-toggle");
-      let isOpen = submenu.style.display === "block";
+    <label for="peringkat">Peringkat</label>
+    <input type="text" id="peringkat" name="peringkat" placeholder="Peringkat" required>
 
-      document.querySelectorAll(".submenu").forEach(s => s.style.display = "none");
-      document.querySelectorAll(".submenu-toggle").forEach(i => i.style.transform = "rotate(0deg)");
-      document.querySelectorAll(".has-submenu").forEach(hs => hs.classList.remove("submenu-open"));
+    <label for="tingkat">Tingkat</label>
+    <input type="text" id="tingkat" name="tingkat" placeholder="Tingkat" required>
 
-      if (!isOpen) {
-        submenu.style.display = "block";
-        icon.style.transform = "rotate(90deg)";
-        submenuContainer.classList.add("submenu-open");
-      }
+    <label for="jenisPrestasi">Jenis Prestasi</label>
+    <input type="text" id="jenisPrestasi" name="jenisPrestasi" placeholder="Jenis Prestasi" required>
+
+    <label for="deskripsi">Deskripsi</label>
+    <input type="text" id="deskripsi" name="deskripsi" placeholder="Deskripsi" required>
+
+    <button type="submit" class="btn">SIMPAN</button>
+  </form>
+</div>
+
+<script>
+  function toggleSubmenu(event) {
+    event.preventDefault();
+    let submenuContainer = event.target.closest(".has-submenu");
+    let submenu = submenuContainer.querySelector(".submenu");
+    let icon = submenuContainer.querySelector(".submenu-toggle");
+    let isOpen = submenu.style.display === "block";
+
+    document.querySelectorAll(".submenu").forEach(s => s.style.display = "none");
+    document.querySelectorAll(".submenu-toggle").forEach(i => i.style.transform = "rotate(0deg)");
+    document.querySelectorAll(".has-submenu").forEach(hs => hs.classList.remove("submenu-open"));
+
+    if (!isOpen) {
+      submenu.style.display = "block";
+      icon.style.transform = "rotate(90deg)";
+      submenuContainer.classList.add("submenu-open");
     }
+  }
 
-    function toggleSidebar() {
-      const sidebar = document.getElementById("sidebar");
-      sidebar.classList.toggle("sidebar-hidden");
-    }
-    function confirmLogout() {
-      const confirmed = confirm("Yakin ingin logout?");
-      if (confirmed) {
-        window.location.href = "logout.html";
-      }
-    }
+  function toggleSidebar() {
+    const sidebar = document.getElementById("sidebar");
+    sidebar.classList.toggle("sidebar-hidden");
+  }
 
-  </script>
+  function confirmLogout() {
+    const confirmed = confirm("Yakin ingin logout?");
+    if (confirmed) {
+      window.location.href = "logout.html";
+    }
+  }
+</script>
 </body>
 </html>
