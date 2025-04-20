@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Prestasi Siswa - SDN Poris Pelawad 6</title>
+    <title>Prestasi Kelas - SDN Poris Pelawad 6</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         * {
@@ -339,46 +339,47 @@
                 <span></span><span></span><span></span>
             </div>
             <ul class="nav-links" id="nav-links">
-                <li><a href="#">Beranda</a></li>
+                <li><a th:href="@{/}">Beranda</a></li>
                 <li class="dropdown">
                     <a href="javascript:void(0)" onclick="toggleDropdown(this)">Profil</a>
                     <div class="dropdown-content">
-                        <a href="#">Visi & Misi</a>
-                        <a href="#">Guru & Tendik</a>
-                        <a href="#">Sarana & Prasarana</a>
+                        <a th:href="@{/profil/visi-misi}">Visi & Misi</a>
+                        <a th:href="@{/profil/guru-tendik}">Guru & Tendik</a>
+                        <a th:href="@{/profil/sarana-prasarana}">Sarana & Prasana</a>
                     </div>
                 </li>
                 <li class="dropdown">
                     <a href="javascript:void(0)" onclick="toggleDropdown(this)">Kesiswaan</a>
                     <div class="dropdown-content">
-                        <a href="#">Tata Tertib</a>
-                        <a href="#">Ekstrakurikuler</a>
+                        <a th:href="@{/kesiswaan/tata-tertib}">Tata Tertib</a>
+                        <a th:href="@{/kesiswaan/ekstrakurikuler}">Ekstrakurikuler</a>
                     </div>
                 </li>
                 <li class="dropdown">
                     <a href="javascript:void(0)" onclick="toggleDropdown(this)">Adiwiyata</a>
                     <div class="dropdown-content">
-                        <a href="#">IPMLH</a>
-                        <a href="#">Visi & Misi Adiwiyata</a>
-                        <a href="#">Struktur Adiwiyata</a>
-                        <a href="#">Program Adiwiyata</a>
-                        <a href="#">Dokumentasi</a>
+                        <a th:href="@{/adiwiyata/ipmlh}">IPMLH</a>
+                        <a th:href="@{/adiwiyata/visi-misi-adiwiyata}">Visi & Misi Adiwiyata</a>
+                        <a th:href="@{/adiwiyata/struktur-adiwiyata}">Struktur Adiwiyata</a>
+                        <a th:href="@{/adiwiyata/program-adiwiyata}">Program Adiwiyata</a>
+                        <a th:href="@{/adiwiyata/dokumentasi-adiwiyata}">Dokumentasi</a>
                     </div>
                 </li>
                 <li class="dropdown">
                     <a href="javascript:void(0)" onclick="toggleDropdown(this)">Prestasi</a>
                     <div class="dropdown-content">
-                        <a href="#">Prestasi Sekolah</a>
-                        <a href="#">Prestasi Guru</a>
-                        <a href="#">Prestasi Murid</a>
+                        <a th:href="@{/prestasi/prestasi-sekolah}">Prestasi Sekolah</a>
+                        <a th:href="@{/prestasi/prestasi-guru}">Prestasi Guru</a>
+                        <a th:href="@{/prestasi/prestasi-murid}">Prestasi Murid</a>
+                        <a th:href="@{/prestasi/prestasi-murid}">Prestasi Kelas</a>
                     </div>
                 </li>
                 <li class="dropdown">
                     <a href="javascript:void(0)" onclick="toggleDropdown(this)">Informasi</a>
                     <div class="dropdown-content">
-                        <a href="#">PPDB</a>
-                        <a href="#">Berita</a>
-                        <a href="#">Perpustakaan</a>
+                        <a th:href="@{/informasi/ppdb}">PPDB</a>
+                        <a th:href="@{/informasi/berita}">Berita</a>
+                        <a th:href="@{/informasi/perpustakaan}">Perpustakaan</a>
                     </div>
                 </li>
             </ul>
@@ -387,7 +388,7 @@
 
     <div class="main">
         <img src="img/winner.png" alt="Piala Bintang" class="illustration">
-        <h2>Daftar Prestasi Siswa</h2>
+        <h2>Daftar Prestasi Kelas</h2>
         <div class="search-filter">
             <input type="text" id="searchInput" placeholder="Cari nama atau kelas..." onkeyup="filterTable()">
             <select id="yearFilter" onchange="filterTable()">
@@ -443,7 +444,6 @@
 
     <footer>
         <div class="social-media">
-            <a href="#" class="social-link"><i class="fab fa-facebook"></i> Facebook</a>
             <a href="#" class="social-link"><i class="fab fa-youtube"></i> YouTube</a>
             <a href="#" class="social-link"><i class="fab fa-instagram"></i> Instagram</a>
             <a href="#" class="social-link"><i class="fab fa-tiktok"></i> TikTok</a>
