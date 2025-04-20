@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Laporan Perpustakaan</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .laporan-wrapper {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .laporan-item {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .label {
+      font-weight: bold;
+      display: inline-block;
+      width: 250px;
+    }
+
+    .btn-unduh {
+      display: block;
+      margin: 30px auto 0;
+      padding: 12px 24px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .btn-unduh:hover {
+      background-color: #0056b3;
+    }
+
+    @media (max-width: 600px) {
+      .laporan-wrapper {
+        padding: 20px;
+      }
+
+      .label {
+        width: 100%;
+        margin-bottom: 5px;
+      }
+
+      .laporan-item {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="laporan-wrapper" id="laporan">
+    <h1>Laporan Perpustakaan</h1>
+
+    <div class="laporan-item">
+      <span class="label">Total Buku di Perpustakaan:</span>
+      <span id="totalBuku">0</span>
+    </div>
+
+    <div class="laporan-item">
+      <span class="label">Buku Belum Dikembalikan:</span>
+      <span id="belumKembali">0</span>
+    </div>
+
+    <div class="laporan-item">
+      <span class="label">Total Denda Terkumpul:</span>
+      <span id="totalDenda">Rp 0</span>
+    </div>
+
+    <button class="btn-unduh" onclick="downloadPDF()">Unduh Laporan PDF</button>
+  </div>
+
+  <!-- Script html2pdf -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script>
+    function loadLaporan() {
+      const dataBuku = JSON.parse(localStorage.getItem("dataBuku")) || [];
+      const dataPengembalian = JSON.parse(localStorage.getItem("dataPengembalian")) || [];
+
+      // Total Buku di Perpustakaan berdasarkan jumlah qty
+      let totalQty = dataBuku.reduce((sum, buku) => {
+        return sum + (parseInt(buku.qty) || 0); // Menjumlahkan qty buku
+      }, 0);
+      document.getElementById("totalBuku").textContent = totalQty;
+
+      // Buku yang belum dikembalikan (berdasarkan status dipinjam)
+      let belumKembali = dataBuku.filter(buku =>
+        buku.status && buku.status.toLowerCase() === "dipinjam"
+      ).length;
+      document.getElementById("belumKembali").textContent = belumKembali;
+
+      // Total Denda Terkumpul berdasarkan data pengembalian
+      let totalDenda = dataPengembalian.reduce((sum, item) => {
+        return sum + (parseInt(item.denda) || 0); // Menjumlahkan total denda
+      }, 0);
+      document.getElementById("totalDenda").textContent = "Rp " + totalDenda.toLocaleString("id-ID");
+    }
+
+    function downloadPDF() {
+      const laporan = document.getElementById("laporan");
+      html2pdf()
+        .set({
+          margin: 0.5,
+          filename: 'laporan-perpustakaan.pdf',
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: { scale: 2 },
+          jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+        })
+        .from(laporan)
+        .save();
+    }
+
+    window.onload = loadLaporan;
+  </script>
+
+</body>
+</html>
