@@ -119,52 +119,8 @@
           margin: 4px 0;
         }
 
-        @media screen and (max-width: 768px) {
-          .hamburger {
-            display: flex;
-          }
-
-          .nav-links {
-            display: none;
-            flex-direction: column;
-            width: 100%;
-            background-color: #708e7a;
-            margin-top: 10px;
-          }
-
-          .nav-links.show {
-            display: flex;
-          }
-
-          .nav-links li {
-            width: 100%;
-            text-align: left;
-            position: relative;
-          }
-
-          .dropdown-content {
-            position: static;
-            background-color: #f0f0f0;
-          }
-
-          .dropdown:hover .dropdown-content {
-            display: none;
-          }
-
-          .dropdown.open .dropdown-content {
-            display: block;
-          }
-
-          .logo-text {
-            font-size: 1rem;
-          }
-
-          .nav-links a {
-            font-size: 13px;
-          }
-        }
-
         .main {
+          width: 100%;
           max-width: 1000px;
           margin: 40px auto;
           padding: 30px 20px;
@@ -197,6 +153,7 @@
         }
 
         .table-container {
+          width: 100%;
           overflow-x: auto;
         }
 
@@ -287,11 +244,90 @@
         .social-link:hover {
           text-decoration: underline;
         }
+
+        @media screen and (max-width: 768px) {
+          .hamburger {
+            display: flex;
+          }
+
+          .nav-links {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            background-color: #708e7a;
+            margin-top: 10px;
+          }
+
+          .nav-links.show {
+            display: flex;
+          }
+
+          .nav-links li {
+            width: 100%;
+            text-align: left;
+            position: relative;
+          }
+
+          .dropdown-content {
+            position: static;
+            background-color: #f0f0f0;
+          }
+
+          .dropdown:hover .dropdown-content {
+            display: none;
+          }
+
+          .dropdown.open .dropdown-content {
+            display: block;
+          }
+
+          .logo-text {
+            font-size: 1rem;
+          }
+
+          .nav-links a {
+            font-size: 13px;
+          }
+
+          .main {
+            margin: 20px 10px;
+            padding: 20px 10px;
+            border-radius: 0;
+            box-shadow: none;
+          }
+
+          .search-filter input,
+          .search-filter select {
+            width: 100%;
+            font-size: 15px;
+          }
+
+          table {
+            min-width: unset;
+            font-size: 14px;
+          }
+
+          th, td {
+            padding: 10px 8px;
+          }
+
+          .illustration {
+            max-width: 120px;
+          }
+
+          h2 {
+            font-size: 1.5rem;
+          }
+
+          .table-container {
+            overflow-x: auto;
+            width: 100%;
+          }
+        }
     </style>
 </head>
 <body>
 <div class="page-container">
-    <!-- Header -->
     <header>
         <nav class="navbar">
             <div class="logo-container">
@@ -348,7 +384,6 @@
         </nav>
     </header>
 
-    <!-- Main Content -->
     <div class="main">
         <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Prestasi Icon" class="illustration">
         <h2>Daftar Prestasi Siswa</h2>
@@ -405,7 +440,6 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <footer>
         <div class="social-media">
             <a href="#" class="social-link"><i class="fab fa-facebook"></i> Facebook</a>
