@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard Admin</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" crossorigin="anonymous"></script>
+  <style>
+   * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar {
+      width: 100%;
+      height: 60px;
+      background: #5D2D2A;
+      color: white;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+    }
+
+    .menu-icon {
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .right-section {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: auto;
+    }
+
+    .navbar i.user-icon {
+      font-size: 30px !important;
+    }
+
+    .navbar img {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .navbar h1 {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .sidebar {
+      width: 250px;
+      background: #6A3332;
+      color: white;
+      height: 100vh;
+      padding-top: 80px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 999;
+      transition: transform 0.3s ease-in-out;
+      overflow-y: auto;
+    }
+
+    .sidebar-hidden {
+      transform: translateX(-100%);
+    }
+
+    .admin-profile {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .admin-image {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+
+    .admin-profile::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.5), transparent);
+      margin-top: 10px;
+    }
+
+    .admin-name {
+      font-size: 18px;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .content {
+      margin-top: 80px;
+      padding-left: 270px;
+      padding-right: 20px;
+      transition: padding-left 0.3s ease-in-out;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .content.sidebar-collapsed {
+      padding-left: 20px;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar ul li {
+      margin: 5px 0;
+    }
+
+    .sidebar ul li a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: white;
+      font-size: 18px;
+      padding: 12px 15px;
+      transition: background 0.3s;
+      gap: 10px;
+    }
+
+    .sidebar ul li a i {
+      font-size: 20px;
+      width: 30px;
+      text-align: center;
+    }
+
+    .sidebar ul li a:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+    }
+
+    .sidebar ul li a.active {
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .submenu {
+      display: none;
+      list-style: none;
+      padding-left: 45px;
+    }
+
+    .submenu li a {
+      font-size: 16px;
+      padding: 8px 20px;
+      display: block;
+    }
+
+    .submenu li a:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+    }
+
+    .has-submenu a {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .submenu-toggle {
+      transition: transform 0.3s ease-in-out;
+      font-size: 16px;
+    }
+
+    .submenu-open .submenu-toggle {
+      transform: rotate(90deg);
+    }
+
+    .search-container, .filter-container {
+      margin-bottom: 15px;
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .search-container input[type="text"] {
+  flex: none;           /* hilangkan fleksibilitas */
+  width: 300px;         /* batasi lebar */
+  max-width: 200%;      /* batas maksimum lebar */
+  height: 40px;         /* tambahkan tinggi */
+}
+
+.button-container {
+  margin: 20px 0; /* atas dan bawah 20px */
+}
+    .filter-container select {
+      max-width: 300px;
+      height: 40px;         /* tambahkan tinggi */
+    }
+
+    .create-button {
+      background-color: #6A3332;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .create-button:hover {
+      background-color: #5D2D2A;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+    }
+
+    th, td {
+      text-align: center;
+      padding: 12px;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #007bff;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    .edit-btn, .delete-btn {
+      background: none;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      margin: 0 5px;
+    }
+
+    .edit-btn {
+      color: blue;
+    }
+
+    .delete-btn {
+      color: red;
+    }
+    .back-btn {
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: none;
+      background-color: #6A3332;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
+    }
+
+    .back-btn:hover {
+      background-color: #4e2625;
+    }
+    @media screen and (max-width: 768px) {
+      .navbar {
+        padding: 0 10px;
+      }
+
+      .navbar h1 {
+        font-size: 16px;
+      }
+
+      .sidebar {
+        width: 220px;
+        transform: translateX(-100%);
+      }
+
+      .sidebar.sidebar-hidden {
+        transform: translateX(-100%);
+      }
+
+      .content {
+        padding-left: 20px;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .navbar h1 {
+        font-size: 14px;
+      }
+
+      .menu-icon {
+        font-size: 20px;
+      }
+
+      .sidebar {
+        width: 200px;
+        transform: translateX(-100%);
+      }
+
+      .sidebar.sidebar-hidden {
+        transform: translateX(-100%);
+      }
+
+      .sidebar ul li a {
+        font-size: 16px;
+        padding: 10px;
+      }
+
+      th, td {
+        font-size: 14px;
+        padding: 5px;
+      }
+
+      .search-container, .filter-container {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+      }
+
+      .search-container input[type="text"], .filter-container select {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <span class="menu-icon" onclick="toggleSidebar()">☰</span>
+        <div class="right-section">
+          <i class="fa fa-user"></i>
+          <h1>ADMIN PERPUSTAKAAN</h1>
+        </div>
+      </div>
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+    <ul class="menu-list">
+      <div class="admin-profile">
+        <img src="https://i.pravatar.cc/80?img=12" alt="Profil Admin" class="admin-image">
+        <p class="admin-name">ANISA AMELIA</p>
+      </div>
+      <li><a href="Beranda.html"><i class="fas fa-home"></i> Beranda</a></li>
+      <li><a href="Data Berita.html"><i class="fas fa-book"></i> Data Buku</a></li>
+      <li><a href="Data Pengunjung.html" class="active"><i class="fas fa-users"></i> Pengunjung</a></li>
+      <li><a href="Data Peminjam.html" class="nav-link"><i class="fas fa-user-check"></i> Peminjam</a></li>
+      <li><a href="Data Pengembalian.html" class="nav-link"><i class="fas fa-undo-alt"></i> Data Pengembalian</a></li>
+      <li><a href="Data Transaksi.html" class="nav-link"><i class="fas fa-exchange-alt"></i> Laporan</a></li>
+      <li><a href="#" onclick="confirmLogout()"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+    </ul>
+  </div>
+
+  <div class="content" id="content">
+    <h1>Data Pengunjung Perpustakaan</h1>
+
+    <div class="search-container">
+      <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Cari nama Pengunjung">
+    </div>
+
+    <div class="filter-container">
+      <label for="NamaFilter">Filter Hari Pengunjung:</label>
+      <select id="NamaFilter" onchange="filterByNama()">
+        <option value="">Semua</option>
+        <option value="Senin">Senin</option>
+        <option value="Selasa">Selasa</option>
+        <option value="Rabu">Rabu</option>
+        <option value="Kamis">Kamis</option>
+        <option value="Jumat">Jumat</option>
+        <option value="Sabtu">Sabtu</option>
+        <option value="Minggu">Minggu</option>
+      </select>
+      
+      <button onclick="downloadTable()" class="create-button">Download CSV</button>
+    </div>
+    
+    <div class="button-container">
+      <a class="back-btn" href="Create Pengunjung.html">+ Tambah Pengunjung</a>
+      </div>
+    <table id="tabelPengunjung">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Nama</th>
+          <th>Jumlah</th>
+          <th>Tanggal</th>
+          <th>Keperluan</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Ahmad Fauzan</td>
+          <td>1</td>
+          <td>12 Januari 2025</td>
+          <td>Baca Buku</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  
+</div>
+  <script>
+    // Toggle Sidebar
+    function toggleSidebar() {
+        var sidebar = document.getElementById("sidebar");
+        var content = document.getElementById("content");
+        sidebar.classList.toggle("sidebar-hidden");
+        content.classList.toggle("sidebar-collapsed");
+    }
+
+    // Search Function
+    function searchTable() {
+        const searchInput = document.getElementById("searchInput").value.toLowerCase();
+        const rows = document.getElementById("guruTable").getElementsByTagName("tr");
+
+        for (let i = 1; i < rows.length; i++) {
+            const cell = rows[i].getElementsByTagName("td")[1]; // Nama Buku
+            if (cell) {
+                const text = cell.textContent || cell.innerText;
+                rows[i].style.display = text.toLowerCase().includes(searchInput) ? "" : "none";
+            }
+        }
+    }
+
+    // Filter Function
+    function filterByNama() {
+        const filterValue = document.getElementById("NamaFilter").value.toLowerCase();
+        const rows = document.getElementById("guruTable").getElementsByTagName("tr");
+
+        for (let i = 1; i < rows.length; i++) {
+            const cell = rows[i].getElementsByTagName("td")[1]; // Nama Buku
+            if (cell) {
+                const text = cell.textContent || cell.innerText;
+                rows[i].style.display = text.toLowerCase().includes(filterValue) ? "" : "none";
+            }
+        }
+    }
+// Fungsi download data CSV
+function downloadTable() {
+    let table = document.getElementById("guruTable");
+    let rows = Array.from(table.rows);
+    let csv = rows.map(row =>
+      Array.from(row.cells).map(cell => `"${cell.innerText}"`).join(",")
+    ).join("\n");
+
+    let blob = new Blob([csv], { type: "text/csv" });
+    let link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "data_prestasi_guru.csv";
+    link.click();
+  }
+    // Delete Row Function
+    function deleteRow(button) {
+        const row = button.closest("tr");
+        row.remove();
+        hitungTotalQty(); // Update Total
+    }
+
+    // Hitung Total Qty
+    function hitungTotalQty() {
+        const table = document.getElementById("guruTable");
+        const rows = table.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+        let total = 0;
+
+        for (let i = 0; i < rows.length; i++) {
+            let qtyCell = rows[i].getElementsByTagName("td")[3]; // kolom Qty
+            if (qtyCell && !isNaN(parseInt(qtyCell.textContent))) {
+                total += parseInt(qtyCell.textContent);
+            }
+        }
+
+        document.getElementById("totalQty").textContent = total;
+    }
+
+    // Call on load
+    window.onload = function () {
+        hitungTotalQty(); // Update total quantity
+    };
+  </script>
+</body>
+</html>
