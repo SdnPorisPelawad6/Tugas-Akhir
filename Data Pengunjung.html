@@ -405,6 +405,7 @@
           <th>No</th>
           <th>Nama</th>
           <th>Jumlah</th>
+          <th>Hari</th>
           <th>Tanggal</th>
           <th>Keperluan</th>
         </tr>
@@ -414,6 +415,7 @@
           <td>1</td>
           <td>Ahmad Fauzan</td>
           <td>1</td>
+          <td>Senin</td>
           <td>12 Januari 2025</td>
           <td>Baca Buku</td>
         </tr>
@@ -423,45 +425,46 @@
 
   
 </div>
-  <script>
-    // Toggle Sidebar
-    function toggleSidebar() {
-        var sidebar = document.getElementById("sidebar");
-        var content = document.getElementById("content");
-        sidebar.classList.toggle("sidebar-hidden");
-        content.classList.toggle("sidebar-collapsed");
+<script>
+  // Toggle Sidebar
+  function toggleSidebar() {
+    var sidebar = document.getElementById("sidebar");
+    var content = document.getElementById("content");
+    sidebar.classList.toggle("sidebar-hidden");
+    content.classList.toggle("sidebar-collapsed");
+  }
+
+  // Search Function (cari nama)
+  function searchTable() {
+    const searchInput = document.getElementById("searchInput").value.toLowerCase();
+    const rows = document.getElementById("tabelPengunjung").getElementsByTagName("tr");
+
+    for (let i = 1; i < rows.length; i++) {
+      const cell = rows[i].getElementsByTagName("td")[1]; // kolom Nama
+      if (cell) {
+        const text = cell.textContent || cell.innerText;
+        rows[i].style.display = text.toLowerCase().includes(searchInput) ? "" : "none";
+      }
     }
+  }
 
-    // Search Function
-    function searchTable() {
-        const searchInput = document.getElementById("searchInput").value.toLowerCase();
-        const rows = document.getElementById("guruTable").getElementsByTagName("tr");
+  // Filter berdasarkan hari
+  function filterByNama() {
+    const filterValue = document.getElementById("NamaFilter").value.toLowerCase();
+    const rows = document.getElementById("tabelPengunjung").getElementsByTagName("tr");
 
-        for (let i = 1; i < rows.length; i++) {
-            const cell = rows[i].getElementsByTagName("td")[1]; // Nama Buku
-            if (cell) {
-                const text = cell.textContent || cell.innerText;
-                rows[i].style.display = text.toLowerCase().includes(searchInput) ? "" : "none";
-            }
-        }
+    for (let i = 1; i < rows.length; i++) {
+      const hariCell = rows[i].getElementsByTagName("td")[3]; // kolom Hari
+      if (hariCell) {
+        const text = hariCell.textContent || hariCell.innerText;
+        rows[i].style.display = (filterValue === "" || text.toLowerCase() === filterValue) ? "" : "none";
+      }
     }
+  }
 
-    // Filter Function
-    function filterByNama() {
-        const filterValue = document.getElementById("NamaFilter").value.toLowerCase();
-        const rows = document.getElementById("guruTable").getElementsByTagName("tr");
-
-        for (let i = 1; i < rows.length; i++) {
-            const cell = rows[i].getElementsByTagName("td")[1]; // Nama Buku
-            if (cell) {
-                const text = cell.textContent || cell.innerText;
-                rows[i].style.display = text.toLowerCase().includes(filterValue) ? "" : "none";
-            }
-        }
-    }
-// Fungsi download data CSV
-function downloadTable() {
-    let table = document.getElementById("guruTable");
+  // Download data sebagai CSV
+  function downloadTable() {
+    let table = document.getElementById("tabelPengunjung");
     let rows = Array.from(table.rows);
     let csv = rows.map(row =>
       Array.from(row.cells).map(cell => `"${cell.innerText}"`).join(",")
@@ -470,36 +473,21 @@ function downloadTable() {
     let blob = new Blob([csv], { type: "text/csv" });
     let link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
-    link.download = "data_prestasi_guru.csv";
+    link.download = "data_pengunjung.csv";
     link.click();
   }
-    // Delete Row Function
-    function deleteRow(button) {
-        const row = button.closest("tr");
-        row.remove();
-        hitungTotalQty(); // Update Total
-    }
 
-    // Hitung Total Qty
-    function hitungTotalQty() {
-        const table = document.getElementById("guruTable");
-        const rows = table.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
-        let total = 0;
+  // Fungsi tidak dipakai namun disiapkan
+  function deleteRow(button) {
+    const row = button.closest("tr");
+    row.remove();
+  }
 
-        for (let i = 0; i < rows.length; i++) {
-            let qtyCell = rows[i].getElementsByTagName("td")[3]; // kolom Qty
-            if (qtyCell && !isNaN(parseInt(qtyCell.textContent))) {
-                total += parseInt(qtyCell.textContent);
-            }
-        }
+  // Dummy call on load
+  window.onload = function () {
+    // Bisa tambahkan init di sini jika perlu
+  };
+</script>
 
-        document.getElementById("totalQty").textContent = total;
-    }
-
-    // Call on load
-    window.onload = function () {
-        hitungTotalQty(); // Update total quantity
-    };
-  </script>
 </body>
 </html>
